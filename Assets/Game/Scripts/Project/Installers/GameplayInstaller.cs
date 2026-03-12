@@ -21,7 +21,8 @@ namespace Game.Scripts.Project.Installers
                 .AsSingle();
 
             Container.BindFactory<TowerType, Tower, Tower.Factory>()
-                .FromComponentInNewPrefab(towerPrefab);
+                .FromComponentInNewPrefab(towerPrefab)
+                .UnderTransformGroup("Towers");
         }
     }
 }

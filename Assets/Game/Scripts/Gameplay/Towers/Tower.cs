@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,9 +8,8 @@ namespace Game.Scripts.Project.Services
     {
         private TowerType _towerType;
         
-        // Добавь конструктор с параметром TowerType
         [Inject]
-        public Tower(TowerType towerType)
+        public void Construct(TowerType towerType)
         {
             _towerType = towerType;
         }
