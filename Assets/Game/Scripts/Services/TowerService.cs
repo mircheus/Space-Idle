@@ -16,7 +16,8 @@ namespace Game.Scripts.Project.Services
         
         public void PlaceTower(TowerType type, Vector3 pos)
         {
-            _towerFactory.Create(type);
+            var tower = _towerFactory.Create(type);
+            tower.transform.position = pos;
         }
 
         public void UpgradeTower(Tower tower)
