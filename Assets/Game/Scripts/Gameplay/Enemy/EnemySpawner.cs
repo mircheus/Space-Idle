@@ -1,4 +1,6 @@
 ﻿using System;
+using Game.Scripts.Project.Installers;
+using Game.Scripts.Project.Settings;
 using UnityEngine;
 using Zenject;
 
@@ -6,18 +8,19 @@ namespace Game.Scripts.Gameplay.Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private Transform[] _spawnPoints;
-        
         private Enemy.Factory _enemyFactory;
         private float _timer;
-        private GameSettings _settings;
+        private EnemySettings _settings;
+        private Vector3[] _spawnPoints;
 
         [Inject]
-        public void Construct(Enemy.Factory enemyFactory, GameSettings settings)
+        public void Construct(Enemy.Factory enemyFactory, EnemySettings settings, LevelPointsConfig levelPointsConfig)
         {
             _enemyFactory = enemyFactory;
+            _settings = settings;
+            _spawnPoints = levelPointsConfig.SpawnPoints;
         }
-
+        
         private void Update()
         {
             _timer += Time.deltaTime;
@@ -34,7 +37,7 @@ namespace Game.Scripts.Gameplay.Enemy
             int randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Length);
             var spawnPoint = _spawnPoints[randomIndex];
             Enemy enemy = _enemyFactory.Create();
-            enemy.transform.position = spawnPoint.position;
+            enemy.transform.position = spawnPoint;
         }
     }
 }

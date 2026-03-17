@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9146301c828c41bab36fd445b1349e17, type: 3}
+  m_Name: EnemySettings
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  speed: 5
+  points: 20
+  spawnInterval: 3
+  spawnCount: 3
+  spawnPoints: {fileID: 926369075331318275, guid: df3e31232b5e47b4c9fef7a6320496ae, type: 3}
+  waypoints: {fileID: 6162294014547440511, guid: b782626dde7401647b6f7c8b4bc33c71, type: 3}

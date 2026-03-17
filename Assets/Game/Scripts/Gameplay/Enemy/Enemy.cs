@@ -7,7 +7,6 @@ namespace Game.Scripts.Gameplay.Enemy
 {
     public class Enemy : MonoBehaviour
     {
-        private Transform _target;
         private int _health;
         private float _speed;
         private int _pointsPerKill;
@@ -15,13 +14,12 @@ namespace Game.Scripts.Gameplay.Enemy
         private SignalBus _signalBus;
 
         [Inject]
-        public void Construct(Transform t, GameSettings settings, SignalBus signalBus)
+        public void Construct(GameSettings settings, SignalBus signalBus)
         {
-            _target = t;
             _signalBus = signalBus;
-            _health = settings.MaxHealth;
-            _speed = settings.Speed;
-            _pointsPerKill =  settings.Points;
+            _health = settings.EnemySettings.MaxHealth;
+            _speed = settings.EnemySettings.Speed;
+            _pointsPerKill =  settings.EnemySettings.Points;
         }
 
         private void Update()
@@ -45,7 +43,14 @@ namespace Game.Scripts.Gameplay.Enemy
 
         private void MoveTowardsTarget()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+            // transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+            
+            transform.Translate(Vector3.left * _speed * Time.deltaTime);
+
+            if (transform.position.x < -6f)
+            {
+                Destroy(gameObject);
+            }
         }
         
         public class Factory : PlaceholderFactory<Enemy> { }

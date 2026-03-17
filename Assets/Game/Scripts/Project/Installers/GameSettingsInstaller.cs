@@ -11,6 +11,7 @@ namespace Game.Scripts.Project.Installers
         public override void InstallBindings()
         {
             Container.BindInstance(gameSettings).AsSingle();
+            Container.BindInstance(gameSettings.EnemySettings).AsSingle();
         }
     }
 }

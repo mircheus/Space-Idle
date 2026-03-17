@@ -1,3 +1,4 @@
+using Game.Scripts.Gameplay.Enemy;
 using Game.Scripts.Project.Services;
 using Game.Scripts.Project.Signals;
 using UnityEngine;
@@ -8,12 +9,14 @@ namespace Game.Scripts.Project.Installers
     public class GameplayInstaller : MonoInstaller
     {
         [SerializeField] private GameObject towerPrefab;
-        
-		public override void InstallBindings()
+        [SerializeField] private GameObject enemyPrefab;
+
+        public override void InstallBindings()
         {
            InstallSignals();
            InstallInput();
            InstallTowers();
+           InstallEnemies();
         }
 
         private void InstallSignals()
@@ -32,6 +35,12 @@ namespace Game.Scripts.Project.Installers
             Container.BindFactory<TowerType, Tower, Tower.Factory>()
                 .FromComponentInNewPrefab(towerPrefab)
                 .UnderTransformGroup("Towers");
+        }
+
+        private void InstallEnemies()
+        {
+            Container.BindFactory<Enemy, Enemy.Factory>()
+                .FromComponentInNewPrefab(enemyPrefab);
         }
 
         private void InstallInput()
