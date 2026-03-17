@@ -2,5 +2,9 @@
 {
     public enum EnemyType
     {
+        BasicEnemy,
+        FastEnemy,
+        TankEnemy,
+        BossEnemy
     }
 }
