@@ -2,7 +2,7 @@ using Game.Scripts.Project.Services;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Gameplay
+namespace Game.Scripts.Towers
 {
     public class Player : MonoBehaviour
     {

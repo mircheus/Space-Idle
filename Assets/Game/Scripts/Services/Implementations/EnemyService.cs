@@ -39,6 +39,7 @@ namespace Game.Scripts.Project.Services
             Debug.Log("SpawnEnemy");
             // TODO : Добавить логику выбора типа противника
             Enemy enemy = _factory.Create();
+            enemy.Initialize();
             _enemies.Add(enemy);
             enemy.transform.position = _spawnPoints[0];
             return enemy;

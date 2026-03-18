@@ -8,7 +8,7 @@ namespace Game.Scripts.Project.Services
     {
         Enemy SpawnEnemy(EnemyType type);
         List<Enemy> GetActiveEnemies();
-        void OnEnemyKilled();
-        void OnEnemyReachedEnd();
+        void OnEnemyKilled(); // NOTE: вместо метода должен быть Signal
+        void OnEnemyReachedEnd(); // NOTE: вместо метода должен быть Signal
     }
 }

@@ -7,16 +7,17 @@ public class EnemySettings : ScriptableObject
     [Header("Enemy Settings")]
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
-    [SerializeField] private int points;
+    [SerializeField] private int pointsPerKill;
+    [SerializeField] private int damage;
+
 
     [Header("Enemy Spawn Settings")] 
     [SerializeField] private float spawnInterval;
     [SerializeField] private int spawnCount;
-    // [SerializeField] private SpawnPoints spawnPoints;
     
     public int MaxHealth => maxHealth;
     public float Speed => speed;
-    public int Points => points;
+    public int PointsPerKill => pointsPerKill;
     public float SpawnInterval => spawnInterval;
-    // public SpawnPoints SpawnPoints => spawnPoints;
+    public int Damage => damage;
 }

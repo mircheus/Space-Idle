@@ -35,6 +35,10 @@ namespace Game.Scripts.Project.Installers
             Container.BindFactory<TowerType, Tower, Tower.Factory>()
                 .FromComponentInNewPrefab(towerPrefab)
                 .UnderTransformGroup("Towers");
+
+            Container.Bind<IHealthService>()
+                .To<HealthService>()
+                .AsSingle();
         }
 
         private void InstallEnemies()

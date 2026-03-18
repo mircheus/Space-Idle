@@ -1,4 +1,5 @@
-﻿using Game.Scripts.Project.Settings;
+﻿using System.Data;
+using Game.Scripts.Project.Settings;
 using UnityEngine;
 
 namespace Game.Scripts.Project.Services
@@ -21,7 +22,7 @@ namespace Game.Scripts.Project.Services
         {
             if (current == _waypoints.Length)
             {
-                return 
+                return _waypoints[^1]; // NOTE: не уверен, что это ок просто отдавать последнюю точку
             }
             
             return _waypoints[current];
