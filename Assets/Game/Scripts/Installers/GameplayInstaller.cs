@@ -42,7 +42,12 @@ namespace Game.Scripts.Project.Installers
             Container.BindFactory<Enemy, Enemy.Factory>()
                 .FromComponentInNewPrefab(enemyPrefab);
 
-            Container.BindInterfacesTo<EnemyService>().AsSingle();
+            Container.Bind<IPathService>()
+                .To<PathService>()
+                .AsSingle();
+            
+            Container.BindInterfacesTo<EnemyService>()
+                .AsSingle();
         }
 
         private void InstallInput()

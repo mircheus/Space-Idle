@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.Project.Services;
 using Game.Scripts.Project.Signals;
 using UnityEngine;
 using Zenject;
@@ -12,14 +13,23 @@ namespace Game.Scripts.Gameplay.Enemy
         private int _pointsPerKill;
         private bool _isDead;
         private SignalBus _signalBus;
+        private IPathService _pathService;
+        private Vector3 _currentWaypoint;
+        private int _currentWaypointIndex = 0;
 
         [Inject]
-        public void Construct(GameSettings settings, SignalBus signalBus)
+        public void Construct(GameSettings settings, SignalBus signalBus, IPathService pathService)
         {
             _signalBus = signalBus;
             _health = settings.EnemySettings.MaxHealth;
             _speed = settings.EnemySettings.Speed;
             _pointsPerKill =  settings.EnemySettings.Points;
+            _pathService = pathService;
+        }
+
+        private void Start()
+        {
+            SetNextWaypoint();
         }
 
         private void Update()
@@ -43,14 +53,18 @@ namespace Game.Scripts.Gameplay.Enemy
 
         private void MoveTowardsTarget()
         {
-            // transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
-            
-            transform.Translate(Vector3.left * _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint, _speed * Time.deltaTime);
 
-            if (transform.position.x < -6f)
+            if (transform.position == _currentWaypoint)
             {
-                Destroy(gameObject);
+                SetNextWaypoint();
             }
+        }
+
+        private void SetNextWaypoint()
+        {
+            _currentWaypoint = _pathService.GetNextWaypoint(_currentWaypointIndex);
+            _currentWaypointIndex++;
         }
         
         public class Factory : PlaceholderFactory<Enemy> { }
