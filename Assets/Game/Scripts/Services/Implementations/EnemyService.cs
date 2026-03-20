@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Scripts.Implementations
 {
-    public class EnemyService : IEnemyService, ITickable
+    public class EnemyService : IEnemyService
     {
         private Enemy.Factory _factory;
         private float _timer;
@@ -20,18 +20,7 @@ namespace Game.Scripts.Implementations
             _spawnPoints = levelPointsConfig.SpawnPoints;
             _enemies = new List<Enemy>();
         }
-
-        public void Tick()
-        {
-            // _timer += Time.deltaTime;
-            //
-            // if (_timer >= _settings.SpawnInterval)
-            // {
-            //     SpawnEnemy();
-            //     _timer = 0;
-            // }
-        }
-
+        
         public Enemy SpawnEnemy(EnemyType type)
         {
             Enemy enemy = _factory.Create(type);
