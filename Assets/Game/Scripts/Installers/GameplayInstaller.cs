@@ -1,10 +1,9 @@
-using Game.Scripts.Gameplay.Enemy;
-using Game.Scripts.Project.Services;
-using Game.Scripts.Project.Signals;
+using Game.Scripts.Implementations;
+using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Installers
+namespace Game.Scripts
 {
     public class GameplayInstaller : MonoInstaller
     {
@@ -43,7 +42,7 @@ namespace Game.Scripts.Project.Installers
 
         private void InstallEnemies()
         {
-            Container.BindFactory<Enemy, Enemy.Factory>()
+            Container.BindFactory<EnemyType, Enemy, Enemy.Factory>()
                 .FromComponentInNewPrefab(enemyPrefab);
 
             Container.Bind<IPathService>()

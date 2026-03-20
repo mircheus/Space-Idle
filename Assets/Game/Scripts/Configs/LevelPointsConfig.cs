@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.Project.Settings
+namespace Game.Scripts
 {
     [CreateAssetMenu(fileName = "LevelPointsConfig", menuName = "Space-Idle/LevelPointsConfig")]
     public class LevelPointsConfig : ScriptableObject

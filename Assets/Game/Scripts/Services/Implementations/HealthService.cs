@@ -1,8 +1,8 @@
-﻿using Game.Scripts.Project.Signals;
+﻿using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class HealthService : IHealthService, IInitializable
     {

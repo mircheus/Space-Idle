@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class TowerService : ITowerService
     {

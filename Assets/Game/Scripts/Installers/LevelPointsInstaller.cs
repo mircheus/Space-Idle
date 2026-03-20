@@ -1,9 +1,7 @@
-﻿using Game.Scripts.Gameplay.Enemy;
-using Game.Scripts.Project.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Installers
+namespace Game.Scripts
 {
     public class LevelPointsInstaller : MonoInstaller
     {

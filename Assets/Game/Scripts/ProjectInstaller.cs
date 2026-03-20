@@ -1,4 +1,5 @@
-using Game.Scripts.Project.Services;
+using Game.Scripts.Implementations;
+using Game.Scripts.Interfaces;
 using Zenject;
 
 public class ProjectInstaller : MonoInstaller

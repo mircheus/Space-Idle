@@ -1,7 +1,9 @@
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts
 {
     public enum TowerType
     {
-        Default
+        BasicTower,
+        SniperTower,
+        SlowTower
     }
 }

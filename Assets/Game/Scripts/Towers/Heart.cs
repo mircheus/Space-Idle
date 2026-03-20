@@ -1,9 +1,8 @@
-﻿using Game.Scripts.Gameplay.Enemy;
-using Game.Scripts.Project.Services;
+﻿using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Towers
+namespace Game.Scripts
 {
     public class Heart : MonoBehaviour
     {

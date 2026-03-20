@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.Project.Signals
+﻿namespace Game.Scripts
 {
     public struct EnemyDiedSignal
     {

@@ -1,8 +1,7 @@
-﻿using System.Data;
-using Game.Scripts.Project.Settings;
+﻿using Game.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class PathService : IPathService
     {

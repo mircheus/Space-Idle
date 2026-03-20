@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts
 {
     public class Tower : MonoBehaviour
     {

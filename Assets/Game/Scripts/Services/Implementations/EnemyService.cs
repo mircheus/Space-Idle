@@ -1,45 +1,40 @@
 ﻿using System.Collections.Generic;
-using Game.Scripts.Gameplay.Enemy;
-using Game.Scripts.Project.Settings;
+using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class EnemyService : IEnemyService, ITickable
     {
         private Enemy.Factory _factory;
         private float _timer;
-        private EnemySettings _settings;
+        private EnemiesList _enemiesList;
         private Vector3[] _spawnPoints;
         private List<Enemy> _enemies;
 
-        public EnemyService(Enemy.Factory enemyFactory, EnemySettings settings, LevelPointsConfig levelPointsConfig)
+        public EnemyService(Enemy.Factory enemyFactory, EnemiesList enemiesList, LevelPointsConfig levelPointsConfig)
         {
-            Debug.Log("Created EnemyService");
             _factory = enemyFactory;
-            _settings = settings;
+            _enemiesList = enemiesList;
             _spawnPoints = levelPointsConfig.SpawnPoints;
             _enemies = new List<Enemy>();
         }
 
         public void Tick()
         {
-            _timer += Time.deltaTime;
-            
-            if (_timer >= _settings.SpawnInterval)
-            {
-                SpawnEnemy();
-                _timer = 0;
-            }
+            // _timer += Time.deltaTime;
+            //
+            // if (_timer >= _settings.SpawnInterval)
+            // {
+            //     SpawnEnemy();
+            //     _timer = 0;
+            // }
         }
 
-        public Enemy SpawnEnemy(EnemyType type = EnemyType.BasicEnemy)
+        public Enemy SpawnEnemy(EnemyType type)
         {
-            Debug.Log("SpawnEnemy");
-            // TODO : Добавить логику выбора типа противника
-            Enemy enemy = _factory.Create();
-            enemy.Initialize();
+            Enemy enemy = _factory.Create(type);
             _enemies.Add(enemy);
             enemy.transform.position = _spawnPoints[0];
             return enemy;

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using Game.Scripts.Interfaces;
 using UnityEngine.SceneManagement;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class SceneService : ISceneService
     {

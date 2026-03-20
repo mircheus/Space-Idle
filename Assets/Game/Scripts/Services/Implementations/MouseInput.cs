@@ -1,6 +1,7 @@
+using Game.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Implementations
 {
     public class MouseInput : IInputService
     {

@@ -1,8 +1,8 @@
-using Game.Scripts.Project.Services;
+using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Towers
+namespace Game.Scripts
 {
     public class Player : MonoBehaviour
     {
@@ -27,7 +27,7 @@ namespace Game.Scripts.Towers
             if (_input.IsClicking)
             {
                 Vector2 clickPos = _mainCamera.ScreenToWorldPoint(_input.GetClickPosition());
-                _towerService.PlaceTower(TowerType.Default, clickPos);
+                _towerService.PlaceTower(TowerType.BasicTower, clickPos);
             }
         }
     }

@@ -1,4 +1,4 @@
-using Game.Scripts.Project.Services;
+using Game.Scripts.Interfaces;
 using Zenject;
 
 public class AppEntryPoint : IInitializable

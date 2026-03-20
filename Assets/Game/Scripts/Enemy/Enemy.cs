@@ -1,11 +1,8 @@
-﻿using System;
-using Game.Scripts.Project.Services;
-using Game.Scripts.Project.Signals;
-using Game.Scripts.Towers;
+﻿using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Gameplay.Enemy
+namespace Game.Scripts
 {
     public class Enemy : MonoBehaviour
     {
@@ -18,27 +15,36 @@ namespace Game.Scripts.Gameplay.Enemy
         private SignalBus _signalBus;
         private IPathService _pathService;
         private Vector3 _currentWaypoint;
-        private EnemySettings _settings;
+        private EnemyConfig _config;
         private int _currentWaypointIndex = 0;
         
         public int Damage => _damage;
 
         [Inject]
-        public void Construct(GameSettings settings, SignalBus signalBus, IPathService pathService)
+        public void Construct(SignalBus signalBus, IPathService pathService)
         {
             Debug.Log("Enemy Construct");
             _signalBus = signalBus;
-            _settings = settings.EnemySettings;
+            // _config = config;
             _pathService = pathService;
         }
 
         public void Initialize()
         {
             Debug.Log("Enemy Initialize");
-            _health = _settings.MaxHealth;
-            _speed = _settings.Speed;
-            _pointsPerKill =  _settings.PointsPerKill;
-            _damage = _settings.Damage;
+            _health = _config.MaxHealth;
+            _speed = _config.Speed;
+            _pointsPerKill =  _config.PointsPerKill;
+            _damage = _config.Damage;
+        }
+
+        public void Setup(EnemyConfig config)
+        {
+            Debug.Log("Enemy Setup");
+            _health = config.MaxHealth;
+            _speed = config.Speed;
+            _pointsPerKill =  config.PointsPerKill;
+            _damage = config.Damage;
         }
 
         private void Start()
@@ -93,6 +99,6 @@ namespace Game.Scripts.Gameplay.Enemy
             _currentWaypointIndex++;
         }
 
-        public class Factory : PlaceholderFactory<Enemy> { }
+        public class Factory : PlaceholderFactory<EnemyType, Enemy> { }
     }
 }

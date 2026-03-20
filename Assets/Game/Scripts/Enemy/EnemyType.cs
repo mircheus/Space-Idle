@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.Project.Services
+﻿namespace Game.Scripts
 {
     public enum EnemyType
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.Project.Services
+namespace Game.Scripts.Interfaces
 {
     public interface IPathService
     {
