@@ -66,7 +66,7 @@ namespace Game.Scripts.Implementations
                 return;
             }
 
-            _enemyService.SpawnEnemy(_currentWave.EnemySpawnData.Enemies[_currentEnemyIndex].Type);
+            _enemyService.SpawnEnemy(_currentWave.EnemySpawnData.Enemies[_currentEnemyIndex]);
             _currentEnemyIndex++;
         }
     }
