@@ -4,6 +4,5 @@
     {
         void StartWave(int index);
         int GetCurrentWave();
-        
     }
 }

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0768c96131dd4c41a50cd78e28011552, type: 3}
-  m_Name: GameSettings
+  m_Script: {fileID: 11500000, guid: bc98ea8ca10445f5bbefc1700f956e12, type: 3}
+  m_Name: Wave_1
   m_EditorClassIdentifier: 
-  startLives: 3
-  waveConfig: {fileID: 11400000, guid: 6c5c2a128f951544ea9385495d20dbd7, type: 2}
+  enemySpawnData: {fileID: 11400000, guid: e18c4c201bc93b6468431049bcc1bf89, type: 2}

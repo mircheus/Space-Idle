@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 5c2172fced98181439ec2a4e137a949b, type: 2}
+  wavesConfig: {fileID: 11400000, guid: 6c5c2a128f951544ea9385495d20dbd7, type: 2}

@@ -3,7 +3,7 @@
 namespace Game.Scripts
 {
     [CreateAssetMenu(fileName = "WaveConfig", menuName = "Space-Idle/WaveConfig", order = 0)]
-    public class WaveConfig : ScriptableObject
+    public class WavesConfig : ScriptableObject
     {
         [SerializeField] private WaveData[] waves;
 

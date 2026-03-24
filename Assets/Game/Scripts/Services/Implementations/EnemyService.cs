@@ -7,16 +7,16 @@ namespace Game.Scripts.Implementations
 {
     public class EnemyService : IEnemyService
     {
-        private Enemy.Factory _factory;
+        private EnemyFactory _factory;
         private float _timer;
-        private EnemiesList _enemiesList;
+        // private EnemiesList _enemiesList;
         private Vector3[] _spawnPoints;
         private List<Enemy> _enemies;
 
-        public EnemyService(Enemy.Factory enemyFactory, EnemiesList enemiesList, LevelPointsConfig levelPointsConfig)
+        public EnemyService(EnemyFactory enemyFactory, LevelPointsConfig levelPointsConfig)
         {
             _factory = enemyFactory;
-            _enemiesList = enemiesList;
+            // _enemiesList = enemiesList;
             _spawnPoints = levelPointsConfig.SpawnPoints;
             _enemies = new List<Enemy>();
         }

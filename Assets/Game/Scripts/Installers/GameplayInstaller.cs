@@ -9,13 +9,15 @@ namespace Game.Scripts
     {
         [SerializeField] private GameObject towerPrefab;
         [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private AllEnemiesList allEnemiesList;
 
         public override void InstallBindings()
         {
-           InstallSignals();
-           InstallInput();
-           InstallTowers();
-           InstallEnemies();
+            InstallSignals();
+            InstallInput();
+            InstallTowers();
+            InstallEnemies();
+            Container.BindInterfacesTo<GameController>().AsSingle();
         }
 
         private void InstallSignals()
@@ -23,6 +25,8 @@ namespace Game.Scripts
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<EnemyDiedSignal>();
+            Container.DeclareSignal<WaveStartedSignal>();
+            Container.DeclareSignal<WaveCompletedSignal>();
         }
 
         private void InstallTowers()
@@ -42,14 +46,26 @@ namespace Game.Scripts
 
         private void InstallEnemies()
         {
-            Container.BindFactory<EnemyType, Enemy, Enemy.Factory>()
-                .FromComponentInNewPrefab(enemyPrefab);
+            Container.BindFactory<EnemyType, Enemy, EnemyFactory>()
+                .FromComponentInNewPrefab(enemyPrefab)
+                .AsSingle();
 
             Container.Bind<IPathService>()
                 .To<PathService>()
                 .AsSingle();
             
-            Container.BindInterfacesTo<EnemyService>()
+            Container.Bind<IEnemyService>()
+                .To<EnemyService>()
+                .AsSingle();
+
+            Container.BindInterfacesTo<WaveService>()
+                .AsSingle();
+
+            Container.Bind<EnemyConfigProvider>()
+                .AsSingle();
+
+            Container.Bind<AllEnemiesList>()
+                .FromInstance(allEnemiesList)
                 .AsSingle();
         }
 

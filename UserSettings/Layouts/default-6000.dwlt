@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2048
     height: 1108.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 17
+  controlID: 42
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 43
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 19
+  controlID: 44
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -191,7 +191,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1294.4
-    height: 636.8
+    height: 637.6
   m_MinSize: {x: 101, y: 126}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 12}
@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 636.8
+    y: 637.6
     width: 1294.4
-    height: 416.00006
+    height: 415.20007
   m_MinSize: {x: 101, y: 126}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
@@ -229,7 +229,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 18}
   m_Selected: 1
-  m_LastSelected: 2
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -308,7 +308,7 @@ MonoBehaviour:
     x: 0
     y: 24
     width: 1293.4
-    height: 610.8
+    height: 611.6
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -363,22 +363,22 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 1293.4
-      height: 589.8
-    m_Scale: {x: 0.51197916, y: 0.51197916}
-    m_Translation: {x: 646.7, y: 294.9}
+      height: 590.6
+    m_Scale: {x: 0.5126736, y: 0.5126736}
+    m_Translation: {x: 646.7, y: 295.3}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1263.1373
+      x: -1261.4264
       y: -576
-      width: 2526.2747
+      width: 2522.8528
       height: 1152
     m_MinimalGUI: 1
-  m_defaultScale: 0.51197916
-  m_LastWindowPixelSize: {x: 1293.4, y: 610.8}
+  m_defaultScale: 0.5126736
+  m_LastWindowPixelSize: {x: 1293.4, y: 611.6}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 00000000000000000000
@@ -1141,9 +1141,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 716
+    y: 716.8
     width: 1293.4
-    height: 390.00006
+    height: 389.20007
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1166,7 +1166,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Game/Scripts
+    - Assets/Game/Scripts/Towers
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1176,16 +1176,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Game/Scripts/Gameplay/Enemy
+  - Assets/Game/Scripts/Towers
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Unity_Projects\Space-Idle
+  m_LastProjectPath: M:\02_Projects\01_Unity\Space-Idle
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 88bf0000
-    m_LastClickedID: 49032
-    m_ExpandedIDs: 00000000babe0000
+    m_SelectedIDs: dabe0000
+    m_LastClickedID: 48858
+    m_ExpandedIDs: 0000000010bf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1214,7 +1214,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000babe0000
+    m_ExpandedIDs: 0000000010bf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1240,9 +1240,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: f0c90000
+    m_LastClickedInstanceID: 51696
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: f6df0000fad40400
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1294,9 +1294,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 660.8
+    y: 661.6
     width: 1293.4
-    height: 390.00006
+    height: 389.20007
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1330,9 +1330,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 716
+    y: 716.8
     width: 1293.4
-    height: 390.00006
+    height: 389.20007
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1355,7 +1355,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Game/ScriptableObjects
+    - Assets/Game/Scripts/Towers
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1365,16 +1365,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Game/ScriptableObjects
+  - Assets/Game/Scripts/Towers
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Unity_Projects\Space-Idle
+  m_LastProjectPath: M:\02_Projects\01_Unity\Space-Idle
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 29.999939}
-    m_SelectedIDs: fab90000
-    m_LastClickedID: 47610
-    m_ExpandedIDs: 00000000babe0000
+    m_SelectedIDs: dabe0000
+    m_LastClickedID: 48858
+    m_ExpandedIDs: 0000000010bf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1403,7 +1403,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000babe0000
+    m_ExpandedIDs: 0000000010bf0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1429,9 +1429,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 56bb0000
-    m_LastClickedInstanceID: 47958
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: f0c90000
+    m_LastClickedInstanceID: 51696
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 34830100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1483,9 +1483,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 715.2
+    y: 716.8
     width: 1293.4
-    height: 390.80005
+    height: 389.20007
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1499,7 +1499,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -55194
+  m_LastSelectedObjectID: 51696
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1541,7 +1541,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 942fffff7042ffffec49ffff8651ffffac54ffff06fbffff26d40000
+      m_ExpandedIDs: 5e97ffff60b2ffff5cb8ffff20d2ffff42ebffff3cedffff06eeffff0afbffff6ac00000e0c200000ac3000018c30000a4c90000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1609,7 +1609,7 @@ MonoBehaviour:
     m_CachedPref: 154
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 47872
+  m_LastInspectedObjectInstanceID: 47980
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -1707,7 +1707,7 @@ MonoBehaviour:
     m_CachedPref: -240
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -55194
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 1

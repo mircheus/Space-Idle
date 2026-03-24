@@ -17,13 +17,15 @@ namespace Game.Scripts
         private Vector3 _currentWaypoint;
         private EnemyConfig _config;
         private int _currentWaypointIndex = 0;
-        
+        private EnemyType  _type;
+
         public int Damage => _damage;
 
         [Inject]
-        public void Construct(SignalBus signalBus, IPathService pathService)
+        public void Construct(EnemyType type, SignalBus signalBus, IPathService pathService)
         {
             Debug.Log("Enemy Construct");
+            _type = type;
             _signalBus = signalBus;
             // _config = config;
             _pathService = pathService;
@@ -63,6 +65,15 @@ namespace Game.Scripts
             MoveTowardsTarget();
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Heart heart))
+            {
+                _isReached = true;
+                Destroy(gameObject, 1f);
+            }
+        }
+
         public void TakeDamage(int damage)
         {
             _health -= damage;
@@ -71,15 +82,6 @@ namespace Game.Scripts
             {
                 _isDead = true;
                 _signalBus.Fire(new EnemyDiedSignal(_pointsPerKill));
-            }
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out Heart heart))
-            {
-                _isReached = true;
-                Destroy(gameObject, 1f);
             }
         }
 
@@ -98,7 +100,5 @@ namespace Game.Scripts
             _currentWaypoint = _pathService.GetNextWaypoint(_currentWaypointIndex);
             _currentWaypointIndex++;
         }
-
-        public class Factory : PlaceholderFactory<EnemyType, Enemy> { }
     }
 }

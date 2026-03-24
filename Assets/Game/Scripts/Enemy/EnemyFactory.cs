@@ -15,6 +15,7 @@ namespace Game.Scripts
         {
             var enemy = base.Create(type);
             var config = _configProvider.GetConfig(type);
+            
             enemy.Setup(config);
             return enemy;
         }

@@ -6,11 +6,11 @@ namespace Game.Scripts
     {
         private readonly Dictionary<EnemyType, EnemyConfig> _configs;
 
-        public EnemyConfigProvider(EnemiesList enemiesList)
+        public EnemyConfigProvider(AllEnemiesList allEnemiesList)
         {
             _configs = new Dictionary<EnemyType, EnemyConfig>();
 
-            foreach (var enemyConfig in enemiesList.EnemiesConfigs)
+            foreach (var enemyConfig in allEnemiesList.EnemiesConfigs)
             {
                 _configs[enemyConfig.Type] = enemyConfig;
             }

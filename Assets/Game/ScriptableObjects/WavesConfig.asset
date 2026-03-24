@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0768c96131dd4c41a50cd78e28011552, type: 3}
-  m_Name: GameSettings
+  m_Script: {fileID: 11500000, guid: 19874790ca724ef3a166b55f24fa1ff6, type: 3}
+  m_Name: WavesConfig
   m_EditorClassIdentifier: 
-  startLives: 3
-  waveConfig: {fileID: 11400000, guid: 6c5c2a128f951544ea9385495d20dbd7, type: 2}
+  waves:
+  - {fileID: 11400000, guid: 09d2463b81a2cad4b83766665bfde32a, type: 2}
+  - {fileID: 11400000, guid: ef8a38a83d4082948ba5478c858eb4cc, type: 2}

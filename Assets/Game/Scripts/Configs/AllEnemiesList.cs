@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Scripts
 {
     [CreateAssetMenu(fileName = "EnemiesList", menuName = "Space-Idle/EnemiesList")]
-    public class EnemiesList : ScriptableObject
+    public class AllEnemiesList : ScriptableObject
     {
         [SerializeField] private List<EnemyConfig> enemiesConfigs;
         

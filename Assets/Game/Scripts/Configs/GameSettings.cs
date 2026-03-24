@@ -7,11 +7,16 @@ namespace Game.Scripts
     {
         [Header("Player Settings:")]
         [SerializeField] private int startLives = 3;
+        
+        [Header("Wave Settings:")]
+        [SerializeField] private WavesConfig wavesConfig;
     
-        [Header("Enemy Settings:")]
-        [SerializeField] private EnemiesList enemiesList;
+        // [Header("Enemy Settings:")]
+        // [SerializeField] private EnemiesList enemiesList;
 
-        public EnemiesList EnemiesList => enemiesList;
+        // public EnemiesList EnemiesList => enemiesList;
         public int StartLives => startLives;
+        
+        public WavesConfig WavesConfig => wavesConfig;
     }
-}
+}   

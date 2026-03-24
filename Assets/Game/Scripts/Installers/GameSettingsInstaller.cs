@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts
@@ -7,11 +8,13 @@ namespace Game.Scripts
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
         [SerializeField] private GameSettings gameSettings;
+        [SerializeField] private WavesConfig wavesConfig;
 
         public override void InstallBindings()
         {
             Container.BindInstance(gameSettings).AsSingle();
-            Container.BindInstance(gameSettings.EnemiesList).AsSingle();
+            Container.BindInstance(wavesConfig).AsSingle();
+            // Container.BindInstance(gameSettings.EnemiesList).AsSingle();
         }
     }
 }
