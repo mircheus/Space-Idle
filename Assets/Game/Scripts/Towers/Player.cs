@@ -24,11 +24,11 @@ namespace Game.Scripts
 
         private void Update()
         {
-            // if (_input.IsClicking)
-            // {
-            //     Vector2 clickPos = _mainCamera.ScreenToWorldPoint(_input.GetClickPosition());
-            //     _towerService.PlaceTower(TowerType.BasicTower, clickPos);
-            // }
+            if (_input.IsClicking)
+            {
+                Vector2 clickPos = _mainCamera.ScreenToWorldPoint(_input.GetClickPosition());
+                _towerService.PlaceTower(TowerType.BasicTower, clickPos);
+            }
         }
     }
 }

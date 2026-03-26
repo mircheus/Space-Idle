@@ -222,6 +222,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 4936087929056184823, guid: e2b6981188a08436297a8894a5782ce2, type: 3}
   enemyPrefab: {fileID: 5342173019463153323, guid: 900b56f4c4d6f6847be2cac81e4ad9b4, type: 3}
   allEnemiesList: {fileID: 11400000, guid: ccaaf2a7ad9cf8a4f940e105f6a05ea6, type: 2}
+  waveView: {fileID: 401633507}
 --- !u!4 &182330294
 Transform:
   m_ObjectHideFlags: 0
@@ -254,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &352919898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -332,7 +333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &401633503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,8 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe4d65e06c4a1347acf5d76ffe9021b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWavePanel: {fileID: 0}
-  startWaveButton: {fileID: 0}
+  startWavePanel: {fileID: 352919897}
+  startWaveButton: {fileID: 1083792963}
 --- !u!1 &512533089
 GameObject:
   m_ObjectHideFlags: 0

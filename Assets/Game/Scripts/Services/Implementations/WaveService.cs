@@ -17,6 +17,7 @@ namespace Game.Scripts.Implementations
 
         public WaveService(GameSettings gameSettings, IEnemyService enemyService, SignalBus signalBus)
         {
+            Debug.Log(new System.Diagnostics.StackTrace());
             Debug.Log($"WaveService constructor");
             _wavesConfig = gameSettings.WavesConfig;
             _enemyService = enemyService;
@@ -28,8 +29,8 @@ namespace Game.Scripts.Implementations
 
         public void Initialize()
         {
-            Debug.Log($"Initialize");
-            StartWave(0);
+            // Debug.Log($"Initialize");
+            // StartWave(0);
         }
 
         public void Tick()
@@ -50,7 +51,6 @@ namespace Game.Scripts.Implementations
         {
             _currentWave = _wavesConfig.Waves[index];
             _isWaveActive = true;
-            _signalBus.Fire<WaveStartedSignal>();
         }
 
         public int GetCurrentWave()

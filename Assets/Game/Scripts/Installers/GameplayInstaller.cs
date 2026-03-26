@@ -1,5 +1,6 @@
 using Game.Scripts.Implementations;
 using Game.Scripts.Interfaces;
+using Game.Scripts.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Game.Scripts
         [SerializeField] private GameObject towerPrefab;
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private AllEnemiesList allEnemiesList;
+        [SerializeField] private WaveView waveView;
 
         public override void InstallBindings()
         {
@@ -17,6 +19,7 @@ namespace Game.Scripts
             InstallInput();
             InstallTowers();
             InstallEnemies();
+            InstallUI();
             Container.BindInterfacesTo<GameController>().AsSingle();
         }
 
@@ -73,6 +76,17 @@ namespace Game.Scripts
         {
             Container.Bind<IInputService>()
                 .To<MouseInput>()
+                .AsSingle();
+        }
+        
+        private void InstallUI()
+        {
+            Container.Bind<WaveView>()
+                .FromInstance(waveView)
+                .AsSingle();
+            
+            Container.BindInterfacesTo<WavePresenter>()
+                .FromNew()
                 .AsSingle();
         }
     }
