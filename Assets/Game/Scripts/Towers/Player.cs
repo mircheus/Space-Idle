@@ -9,6 +9,7 @@ namespace Game.Scripts
         private IInputService _input;
         private ITowerService _towerService;
         private Camera _mainCamera;
+        private LayerMask _buildZoneLayer;
         
         [Inject]
         public void Construct(IInputService input, ITowerService towerService)
@@ -19,7 +20,7 @@ namespace Game.Scripts
 
         private void Awake()
         {
-            _mainCamera = Camera.main; // TODO: а как можно заинжектить камеру?
+            _mainCamera = Camera.main;
         }
 
         private void Update()
