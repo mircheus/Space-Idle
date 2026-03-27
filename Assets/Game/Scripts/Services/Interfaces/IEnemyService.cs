@@ -6,7 +6,6 @@ namespace Game.Scripts.Interfaces
     {
         Enemy SpawnEnemy(EnemyType type);
         List<Enemy> GetActiveEnemies();
-        void OnEnemyKilled(); // NOTE: вместо метода должен быть Signal
-        void OnEnemyReachedEnd(); // NOTE: вместо метода должен быть Signal
+        int GetActiveEnemiesCount();
     }
 }

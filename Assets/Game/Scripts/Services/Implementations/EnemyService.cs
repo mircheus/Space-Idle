@@ -1,26 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.Implementations
 {
-    public class EnemyService : IEnemyService
+    public class EnemyService : IEnemyService, IInitializable, IDisposable
     {
-        private EnemyFactory _factory;
+        private readonly EnemyFactory _factory;
         private float _timer;
-        // private EnemiesList _enemiesList;
-        private Vector3[] _spawnPoints;
+        private readonly Vector3[] _spawnPoints;
         private List<Enemy> _enemies;
+        private readonly SignalBus _signalBus;
 
-        public EnemyService(EnemyFactory enemyFactory, LevelPointsConfig levelPointsConfig)
+        public EnemyService(EnemyFactory enemyFactory, LevelPointsConfig levelPointsConfig, SignalBus signalBus)
         {
             _factory = enemyFactory;
-            // _enemiesList = enemiesList;
             _spawnPoints = levelPointsConfig.SpawnPoints;
             _enemies = new List<Enemy>();
+            _signalBus = signalBus;
         }
-        
+
+        public void Initialize()
+        {
+            _signalBus.Subscribe<EnemyReachedHeartSignal>(EnemyDestroyed);
+            _signalBus.Subscribe<EnemyDiedSignal>(EnemyDestroyed);
+        }
+
+        public void Dispose()
+        {
+            _signalBus.Unsubscribe<EnemyReachedHeartSignal>(EnemyDestroyed);
+            _signalBus.Unsubscribe<EnemyDiedSignal>(EnemyDestroyed);
+        }
+
         public Enemy SpawnEnemy(EnemyType type)
         {
             Enemy enemy = _factory.Create(type);
@@ -34,12 +47,22 @@ namespace Game.Scripts.Implementations
             return _enemies;
         }
 
-        public void OnEnemyKilled()
+        public int GetActiveEnemiesCount()
         {
+            int activeEnemiesCount = 0;
             
+            foreach (var enemy in _enemies)
+            {
+                if (enemy.IsAlive)
+                {
+                    activeEnemiesCount++;
+                }
+            }
+            
+            return activeEnemiesCount;
         }
 
-        public void OnEnemyReachedEnd()
+        private void EnemyDestroyed()
         {
 
         }

@@ -28,6 +28,7 @@ namespace Game.Scripts
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<EnemyDiedSignal>();
+            Container.DeclareSignal<EnemyReachedHeartSignal>();
             Container.DeclareSignal<WaveStartedSignal>();
             Container.DeclareSignal<WaveCompletedSignal>();
         }
@@ -56,9 +57,8 @@ namespace Game.Scripts
             Container.Bind<IPathService>()
                 .To<PathService>()
                 .AsSingle();
-            
-            Container.Bind<IEnemyService>()
-                .To<EnemyService>()
+
+            Container.BindInterfacesAndSelfTo<EnemyService>()
                 .AsSingle();
 
             Container.BindInterfacesTo<WaveService>()

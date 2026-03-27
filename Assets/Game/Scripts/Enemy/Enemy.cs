@@ -17,32 +17,23 @@ namespace Game.Scripts
         private Vector3 _currentWaypoint;
         private EnemyConfig _config;
         private int _currentWaypointIndex = 0;
-        private EnemyType  _type;
+        private EnemyType _type;
+        private bool _isAlive = true;
 
         public int Damage => _damage;
+        public bool IsAlive => _isAlive;
 
         [Inject]
         public void Construct(EnemyType type, SignalBus signalBus, IPathService pathService)
         {
-            Debug.Log("Enemy Construct");
             _type = type;
             _signalBus = signalBus;
             // _config = config;
             _pathService = pathService;
         }
 
-        public void Initialize()
-        {
-            Debug.Log("Enemy Initialize");
-            _health = _config.MaxHealth;
-            _speed = _config.Speed;
-            _pointsPerKill =  _config.PointsPerKill;
-            _damage = _config.Damage;
-        }
-
         public void Setup(EnemyConfig config)
         {
-            Debug.Log("Enemy Setup");
             _health = config.MaxHealth;
             _speed = config.Speed;
             _pointsPerKill =  config.PointsPerKill;
@@ -70,7 +61,9 @@ namespace Game.Scripts
             if (other.TryGetComponent(out Heart heart))
             {
                 _isReached = true;
-                Destroy(gameObject, 1f);
+                _isAlive = false;
+                _signalBus.Fire(new EnemyReachedHeartSignal());
+                Destroy(gameObject);
             }
         }
 
