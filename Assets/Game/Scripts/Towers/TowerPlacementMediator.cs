@@ -32,7 +32,7 @@ public class TowerPlacementMediator : IInitializable, ITickable
     private void TryBuild()
     {
         Vector2 worldPos = _inputService.GetClickPosition();
-        Collider2D hit = Physics2D.OverlapPoint(worldPos, LayerMask.GetMask("BuildZone"));
+        Collider2D hit = Physics2D.OverlapPoint(worldPos, LayerMask.GetMask(Constants.BuildZone));
         
         if (hit == null) return;
         Debug.Log($"Hit : {hit.gameObject.name}");
