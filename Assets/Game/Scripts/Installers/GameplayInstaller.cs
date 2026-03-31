@@ -20,6 +20,7 @@ namespace Game.Scripts
             InstallInput();
             InstallTowers();
             InstallEnemies();
+            InstallEconomy();
             InstallUI();
             Container.BindInterfacesTo<GameController>().AsSingle();
         }
@@ -32,6 +33,8 @@ namespace Game.Scripts
             Container.DeclareSignal<EnemyReachedHeartSignal>();
             Container.DeclareSignal<WaveStartedSignal>();
             Container.DeclareSignal<WaveCompletedSignal>();
+            Container.DeclareSignal<GameOverSignal>();
+            Container.DeclareSignal<GoldChanged>();
         }
 
         private void InstallTowers()
@@ -70,6 +73,13 @@ namespace Game.Scripts
 
             Container.Bind<AllEnemiesList>()
                 .FromInstance(allEnemiesList)
+                .AsSingle();
+        }
+
+        private void InstallEconomy()
+        {
+            Container.Bind<IEconomyService>()
+                .To<EconomyService>()
                 .AsSingle();
         }
 

@@ -23,16 +23,23 @@ namespace Game.Scripts
         public void Initialize()
         {
             _signalBus.Subscribe<WaveStartedSignal>(OnWaveStarted);
+            _signalBus.Subscribe<GameOverSignal>(OnGameOver);
         }
 
         public void Dispose()
         {
             _signalBus.Unsubscribe<WaveStartedSignal>(OnWaveStarted);
+            _signalBus.Unsubscribe<GameOverSignal>(OnGameOver);
         }
 
         private void OnWaveStarted()
         {
             _waveService.StartWave(_currentWave);
+        }
+
+        private void OnGameOver()
+        {
+            // ????
         }
     }
 }
