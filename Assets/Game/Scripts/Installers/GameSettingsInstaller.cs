@@ -14,7 +14,6 @@ namespace Game.Scripts
         {
             Container.BindInstance(gameSettings).AsSingle();
             Container.BindInstance(wavesConfig).AsSingle();
-            // Container.BindInstance(gameSettings.EnemiesList).AsSingle();
         }
     }
 }

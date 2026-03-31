@@ -4,6 +4,7 @@
 public class BuildZone : MonoBehaviour
 {
     public bool IsOccupied { get; private set; }
+    public Vector2 Position => transform.position;
 
     private void Awake()
     {

@@ -12,6 +12,7 @@ namespace Game.Scripts
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private AllEnemiesList allEnemiesList;
         [SerializeField] private WaveView waveView;
+        [SerializeField] private Camera mainCamera;
 
         public override void InstallBindings()
         {
@@ -74,8 +75,14 @@ namespace Game.Scripts
 
         private void InstallInput()
         {
+            Container.Bind<Camera>()
+                .FromInstance(mainCamera);
+            
             Container.Bind<IInputService>()
                 .To<MouseInput>()
+                .AsSingle();
+
+            Container.BindInterfacesAndSelfTo<TowerPlacementMediator>()
                 .AsSingle();
         }
         
