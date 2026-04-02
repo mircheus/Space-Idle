@@ -1,10 +1,10 @@
 ﻿namespace Game.Scripts
 {
-    public struct GoldChanged
+    public struct GoldChangedSignal
     {
         public int NewValue;
         
-        public GoldChanged(int newValue)
+        public GoldChangedSignal(int newValue)
         {
             NewValue = newValue;
         }

@@ -21,15 +21,15 @@ namespace Game.Scripts.Implementations
         public void Initialize()
         {
             _lives = _gameSettings.StartLives;
+            Debug.Log($"Initialize: _lives {_lives} |  _gameSettings {_gameSettings.StartLives}");
         }
 
         public void TakeDamage(int amount)
         {
-            Debug.Log($"TakeDamage {amount}");
             if(_lives <= 0) return;
             
             _lives = Mathf.Max(0, _lives - amount);
-            Debug.Log($"Lives {amount}");
+            Debug.Log($"Lives after damage: {_lives}");
             _signalBus.Fire(new LivesChangedSignal(_lives));
             
             if (_lives <= 0)

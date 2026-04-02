@@ -25,14 +25,14 @@ namespace Game.Scripts.Implementations
             }
             
             _gold -= amount;
-            _signalBus.Fire(new GoldChanged(_gold));
+            _signalBus.Fire(new GoldChangedSignal(_gold));
             return true;
         }
 
         public void AddGold(int amount)
         {
             _gold += amount;
-            _signalBus.Fire(new GoldChanged(_gold));
+            _signalBus.Fire(new GoldChangedSignal(_gold));
         }
     }
 }

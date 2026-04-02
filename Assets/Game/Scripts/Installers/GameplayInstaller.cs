@@ -12,6 +12,7 @@ namespace Game.Scripts
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private AllEnemiesList allEnemiesList;
         [SerializeField] private WaveView waveView;
+        [SerializeField] private HUDView hudView;
         [SerializeField] private Camera mainCamera;
 
         public override void InstallBindings()
@@ -34,7 +35,8 @@ namespace Game.Scripts
             Container.DeclareSignal<WaveStartedSignal>();
             Container.DeclareSignal<WaveCompletedSignal>();
             Container.DeclareSignal<GameOverSignal>();
-            Container.DeclareSignal<GoldChanged>();
+            Container.DeclareSignal<LivesChangedSignal>();
+            Container.DeclareSignal<GoldChangedSignal>();
         }
 
         private void InstallTowers()
@@ -47,8 +49,8 @@ namespace Game.Scripts
                 .FromComponentInNewPrefab(towerPrefab)
                 .UnderTransformGroup("Towers");
 
-            Container.Bind<IHealthService>()
-                .To<HealthService>()
+            Container.BindInterfacesTo<HealthService>()
+                .FromNew()
                 .AsSingle();
         }
 
@@ -103,6 +105,14 @@ namespace Game.Scripts
                 .AsSingle();
             
             Container.BindInterfacesTo<WavePresenter>()
+                .FromNew()
+                .AsSingle();
+            
+            Container.Bind<HUDView>()
+                .FromInstance(hudView)
+                .AsSingle();
+            
+            Container.BindInterfacesTo<HUDPresenter>()
                 .FromNew()
                 .AsSingle();
         }
