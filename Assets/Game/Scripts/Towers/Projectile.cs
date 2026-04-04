@@ -1,5 +1,6 @@
 ﻿using Game.Scripts;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
@@ -32,4 +33,6 @@ public class Projectile : MonoBehaviour
         enemy.TakeDamage(damage);
         Destroy(gameObject);
     }
+    
+    public class Pool : MemoryPool<Projectile> {}
 }
