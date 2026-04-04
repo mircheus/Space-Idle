@@ -6,11 +6,12 @@ namespace Game.Scripts
 {
     public class Enemy : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
         private int _health;
         private float _speed;
         private int _damage;
         private int _pointsPerKill;
-        private bool _isDead = false;
         private bool _isReached = false;
         private SignalBus _signalBus;
         private IPathService _pathService;
@@ -47,7 +48,7 @@ namespace Game.Scripts
 
         private void Update()
         {
-            if (_isDead)
+            if (_isAlive == false)
                 return;
 
             if (_isReached)
@@ -73,8 +74,10 @@ namespace Game.Scripts
 
             if (_health <= 0)
             {
-                _isDead = true;
+                _isAlive = false;
+                spriteRenderer.enabled = false;
                 _signalBus.Fire(new EnemyDiedSignal(_pointsPerKill));
+                Destroy(gameObject);
             }
         }
 

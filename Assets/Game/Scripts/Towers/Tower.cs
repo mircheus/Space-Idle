@@ -15,13 +15,13 @@ namespace Game.Scripts
         [Header("Inject this instead")]
         [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float fireRate;
+        [SerializeField] private List<Enemy> _enemiesInRange = new List<Enemy>(); 
         
         private TowerType _towerType; 
         private Collider2D _collider2D;
-        private Enemy  _currentTarget;
         private Coroutine _fireCoroutine;
+        private Enemy  _currentTarget;
         
-        private List<Enemy> _enemiesInRange = new List<Enemy>(); 
 
         [Inject]
         public void Construct(TowerType towerType)
@@ -62,6 +62,12 @@ namespace Game.Scripts
         private void SetTarget(Enemy enemy)
         {
             _currentTarget = enemy;
+
+            if (_fireCoroutine != null)
+            {
+                StopCoroutine(_fireCoroutine);
+            }
+            
             _fireCoroutine = StartCoroutine(FireLoop());
         }
 
@@ -81,12 +87,15 @@ namespace Game.Scripts
             var go = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
             if (go.TryGetComponent<Projectile>(out var projectile))
-                projectile.Init(_currentTarget);
+            {
+                var direction = (_currentTarget.transform.position - firePoint.position).normalized;
+                projectile.Init(direction);
+            }
         }
         
         private IEnumerator FireLoop()
         {
-            if (_currentTarget.IsAlive == false)
+            if (_currentTarget != null && _currentTarget.IsAlive == false)
             {
                 ClearTarget();
                 yield break;

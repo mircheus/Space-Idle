@@ -79,12 +79,13 @@ namespace Game.Scripts.Implementations
         private void CompleteWaveIfNoEnemiesLeft()
         {
             int activeEnemiesCount = _enemyService.GetActiveEnemiesCount();
-            Debug.Log($"Active enemies count: {activeEnemiesCount}");
+            
+            // Debug.Log($"Active enemies count: {activeEnemiesCount}");
             
             if (activeEnemiesCount == 0)
             {
-                Debug.Log($"[FIRE] WaveCompletedSignal");
-                _signalBus.Fire<WaveCompletedSignal>();
+                // Debug.Log($"[FIRE] WaveCompletedSignal");
+                // _signalBus.Fire<WaveCompletedSignal>();
             }
         }
     }
