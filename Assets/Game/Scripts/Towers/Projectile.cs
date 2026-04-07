@@ -1,38 +1,72 @@
-﻿using Game.Scripts;
+﻿using System.Collections;
+using Game.Scripts;
 using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 12f;
-    [SerializeField] private int damage = 20;
-    [SerializeField] private float maxLifetime = 5f;     // авто-уничтожение
+    private float _speed = 12f;
+    private int _damage = 20;
+    private float _maxLifetime = 5f;     // авто-уничтожение
+
+    [Inject] private Pool _pool;
     
     private Vector3 _direction;
     private Rigidbody2D _rb;
+    private Coroutine _maxLifetimeCoroutine;
 
     private void Awake() => _rb = GetComponent<Rigidbody2D>();
-
+    
     /// <summary>Вызывается башней сразу после Instantiate.</summary>
-    public void Init(Vector3 direction)
+    public void Init(Vector3 direction, ProjectileConfig config)
     {
         _direction = direction;
-        Destroy(gameObject, maxLifetime);                // фолбэк на случай промаха
+        _speed = config.Speed;
+        _damage = config.Damage;
+        _maxLifetime = config.MaxLifetime;
+        _maxLifetimeCoroutine = StartCoroutine(DisableAfter(_maxLifetime));
+    }
+
+    public void Deactivate()
+    {
+        if (_maxLifetimeCoroutine != null)
+        {
+            StopCoroutine(_maxLifetimeCoroutine);
+        }
+
+        _rb.velocity = Vector2.zero;
     }
 
     private void FixedUpdate()
     {
         // Наводимся на текущую позицию цели (homing)
-        _rb.linearVelocity = _direction * speed;
+        _rb.linearVelocity = _direction * _speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.TryGetComponent<Enemy>(out var enemy)) return;
-        enemy.TakeDamage(damage);
-        Destroy(gameObject);
+        enemy.TakeDamage(_damage);
+        _pool.Despawn(this);
     }
-    
-    public class Pool : MemoryPool<Projectile> {}
+
+    private IEnumerator DisableAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _pool.Despawn(this);
+    }
+
+    public class Pool : MemoryPool<Vector3, ProjectileConfig, Projectile>
+    {
+        protected override void Reinitialize(Vector3 direction, ProjectileConfig config,  Projectile projectile)
+        {
+            projectile.Init(direction, config);
+        }
+
+        protected override void OnDespawned(Projectile projectile)
+        {
+            projectile.Deactivate();
+        }
+    }
 }

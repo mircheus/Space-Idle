@@ -267,7 +267,7 @@ namespace Zenject
             }
         }
 
-        protected virtual void OnDespawned(TContract item)
+        protected virtual void OnDespawned(TContract projectile)
         {
             // Optional
         }

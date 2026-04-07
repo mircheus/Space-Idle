@@ -89,7 +89,7 @@ namespace Game.Scripts
             if (go.TryGetComponent<Projectile>(out var projectile))
             {
                 var direction = (_currentTarget.transform.position - firePoint.position).normalized;
-                projectile.Init(direction);
+                // projectile.Init(direction);
             }
         }
         
