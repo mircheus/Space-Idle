@@ -13,20 +13,21 @@ namespace Game.Scripts
         [SerializeField] private Transform firePoint;
         
         [Header("Inject this instead")]
-        [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float fireRate;
-        [SerializeField] private List<Enemy> _enemiesInRange = new List<Enemy>(); 
+        [SerializeField] private List<Enemy> enemiesInRange = new List<Enemy>(); 
         
         private TowerType _towerType; 
         private Collider2D _collider2D;
         private Coroutine _fireCoroutine;
         private Enemy  _currentTarget;
-        
+        private ProjectileFactory _projectileFactory;
+
 
         [Inject]
-        public void Construct(TowerType towerType)
+        public void Construct(TowerType towerType, ProjectileFactory projectileFactory)
         {
             _towerType = towerType;
+            _projectileFactory = projectileFactory;
         }
 
         private void Awake()
@@ -39,7 +40,7 @@ namespace Game.Scripts
         {
             if (other.TryGetComponent<Enemy>(out var enemy))
             {
-                _enemiesInRange.Add(enemy);
+                enemiesInRange.Add(enemy);
             }
             
             if (_currentTarget != null) return;          // уже есть цель
@@ -54,8 +55,8 @@ namespace Game.Scripts
                 if(_currentTarget == enemy)
                     ClearTarget();
 
-                if (_enemiesInRange.Contains(enemy))
-                    _enemiesInRange.Remove(enemy);
+                if (enemiesInRange.Contains(enemy))
+                    enemiesInRange.Remove(enemy);
             }
         }
 
@@ -84,13 +85,8 @@ namespace Game.Scripts
 
         private void Shoot()
         {
-            var go = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-            if (go.TryGetComponent<Projectile>(out var projectile))
-            {
-                var direction = (_currentTarget.transform.position - firePoint.position).normalized;
-                // projectile.Init(direction);
-            }
+            var direction = (_currentTarget.transform.position - firePoint.position).normalized;
+            _projectileFactory.Spawn(firePoint.position, direction);
         }
         
         private IEnumerator FireLoop()

@@ -10,6 +10,8 @@ namespace Game.Scripts
     {
         [SerializeField] private GameObject towerPrefab;
         [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private ProjectileConfig projectileConfig;
         [SerializeField] private AllEnemiesList allEnemiesList;
         [SerializeField] private WaveView waveView;
         [SerializeField] private HUDView hudView;
@@ -50,6 +52,19 @@ namespace Game.Scripts
                 .UnderTransformGroup("Towers");
 
             Container.BindInterfacesTo<HealthService>()
+                .FromNew()
+                .AsSingle();
+
+            Container.BindMemoryPool<Projectile, Projectile.Pool>()
+                .WithInitialSize(10)
+                .FromComponentInNewPrefab(projectilePrefab)
+                .AsCached();
+
+            Container.Bind<ProjectileConfig>()
+                .FromInstance(projectileConfig)
+                .AsSingle();
+            
+            Container.Bind<ProjectileFactory>()
                 .FromNew()
                 .AsSingle();
         }

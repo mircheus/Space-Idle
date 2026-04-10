@@ -2,5 +2,8 @@
 {
     public enum ProjectileType
     {
+        Basic,
+        Sniper,
+        Slow
     }
 }

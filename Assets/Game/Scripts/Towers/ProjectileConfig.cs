@@ -2,7 +2,7 @@
 
 namespace Game.Scripts
 {
-    [CreateAssetMenu(fileName = "ProjectileConfig", menuName = "Configs/Projectile", order = 0)]
+    [CreateAssetMenu(fileName = "ProjectileConfig", menuName = "Space-Idle/ProjectileConfig ", order = 0)]
     public class ProjectileConfig : ScriptableObject
     {
         public ProjectileType Type;

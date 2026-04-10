@@ -42,6 +42,15 @@ MonoBehaviour:
       isAsset: 0
       _id: 1049340217
     - globalId:
+        globalObjectIdString: GlobalObjectId_V1-3-e756e4620d42d4348b0fbda10fadde4a-11400000-0
+      _typeString: Game.Scripts.ProjectileConfig, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _obj: {fileID: 11400000, guid: e756e4620d42d4348b0fbda10fadde4a, type: 2}
+      isSceneGameObject: 0
+      isFolder: 0
+      isAsset: 1
+      _id: 1057431423
+    - globalId:
         globalObjectIdString: GlobalObjectId_V1-1-7bdcad1302531204a9d7787a8daf20f6-102900000-0
       _typeString: UnityEditor.SceneAsset, UnityEditor.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null

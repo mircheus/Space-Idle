@@ -19,8 +19,10 @@ public class Projectile : MonoBehaviour
     private void Awake() => _rb = GetComponent<Rigidbody2D>();
     
     /// <summary>Вызывается башней сразу после Instantiate.</summary>
-    public void Init(Vector3 direction, ProjectileConfig config)
+    public void Init(Vector3 start, Vector3 direction, ProjectileConfig config)
     {
+        gameObject.SetActive(true);
+        gameObject.transform.position = start;
         _direction = direction;
         _speed = config.Speed;
         _damage = config.Damage;
@@ -35,7 +37,8 @@ public class Projectile : MonoBehaviour
             StopCoroutine(_maxLifetimeCoroutine);
         }
 
-        _rb.velocity = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -48,25 +51,38 @@ public class Projectile : MonoBehaviour
     {
         if (!other.TryGetComponent<Enemy>(out var enemy)) return;
         enemy.TakeDamage(_damage);
-        _pool.Despawn(this);
+        DespawnIfActive();
     }
 
     private IEnumerator DisableAfter(float time)
     {
         yield return new WaitForSeconds(time);
-        _pool.Despawn(this);
+        DespawnIfActive();
     }
 
-    public class Pool : MemoryPool<Vector3, ProjectileConfig, Projectile>
+    private void DespawnIfActive()
     {
-        protected override void Reinitialize(Vector3 direction, ProjectileConfig config,  Projectile projectile)
+        if(gameObject.activeSelf) _pool.Despawn(this);
+    }
+
+    public class Pool : MemoryPool<Vector3, Vector3, Projectile>
+    {
+        [Inject] private ProjectileConfig _config;
+        
+        protected override void Reinitialize(Vector3 start, Vector3 direction, Projectile projectile)
         {
-            projectile.Init(direction, config);
+            projectile.Init(start, direction, _config);
         }
 
         protected override void OnDespawned(Projectile projectile)
         {
             projectile.Deactivate();
+        }
+
+        protected override void OnCreated(Projectile item)
+        {
+            base.OnCreated(item);
+            item.gameObject.SetActive(false);
         }
     }
 }

@@ -5,16 +5,18 @@ namespace Game.Scripts
 {
     public class ProjectileFactory
     {
-        private readonly Dictionary<ProjectileType, Projectile.Pool> _pools;
-
-        public ProjectileFactory()
+        // private readonly Dictionary<ProjectileType, Projectile.Pool> _pools;
+        private readonly Projectile.Pool _projectilePool;
+        
+        public ProjectileFactory(Projectile.Pool pool)
         {
-            _pools = new Dictionary<ProjectileType, Projectile.Pool>();
+            _projectilePool = pool;
+            // _pools = new Dictionary<ProjectileType, Projectile.Pool>();
         }
 
-        public Projectile Spawn(ProjectileType type, Vector3 direction, ProjectileConfig config)
+        public Projectile Spawn(Vector3 start, Vector3 direction)
         {
-            return _pools[type].Spawn(direction, config);
+            return _projectilePool.Spawn(start, direction);
         }
     }
 }
