@@ -86,7 +86,7 @@ namespace Game.Scripts
         private void Shoot()
         {
             var direction = (_currentTarget.transform.position - firePoint.position).normalized;
-            _projectileFactory.Spawn(firePoint.position, direction);
+            _projectileFactory.Spawn(_towerType, firePoint.position, direction);
         }
         
         private IEnumerator FireLoop()

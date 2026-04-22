@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Game.Scripts.Implementations;
 using Game.Scripts.Interfaces;
 using Game.Scripts.UI;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +13,7 @@ namespace Game.Scripts
         [SerializeField] private GameObject towerPrefab;
         [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private ProjectileConfig projectileConfig;
+        [SerializeField] private ProjectileConfig[] projectileConfigs;
         [SerializeField] private AllEnemiesList allEnemiesList;
         [SerializeField] private WaveView waveView;
         [SerializeField] private HUDView hudView;
@@ -54,19 +56,28 @@ namespace Game.Scripts
             Container.BindInterfacesTo<HealthService>()
                 .FromNew()
                 .AsSingle();
-
-            Container.BindMemoryPool<Projectile, Projectile.Pool>()
-                .WithInitialSize(10)
-                .FromComponentInNewPrefab(projectilePrefab)
-                .AsCached();
-
-            Container.Bind<ProjectileConfig>()
-                .FromInstance(projectileConfig)
+            
+            foreach (var config in projectileConfigs)
+            {
+                Container.BindMemoryPool<Projectile, Projectile.Pool>()
+                    .WithId(config.towerType)
+                    .WithInitialSize(10)
+                    .FromComponentInNewPrefab(config.Prefab)
+                    // .UnderTransformGroup("Projectiles")
+                    .AsCached();
+                
+                Container.BindInstance(config)
+                    .WithId(config.towerType)
+                    .AsCached();
+            }
+            
+            Container.BindInstance(projectileConfigs)
                 .AsSingle();
             
-            Container.Bind<ProjectileFactory>()
+            Container.BindInterfacesAndSelfTo<ProjectileFactory>()
                 .FromNew()
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstallEnemies()

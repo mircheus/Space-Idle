@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 199ae9056bd747e1acd1f4ffb1259d72, type: 3}
-  m_Name: ProjectileConfig
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  Type: 0
-  Speed: 12
-  Damage: 1
+  towerType: 1
+  Speed: 30
+  Damage: 5
   MaxLifetime: 5
   Prefab: {fileID: 2907387616581427999, guid: ff36c6a3a95172741bd230a48a6cc41b, type: 3}

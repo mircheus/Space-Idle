@@ -5,7 +5,7 @@ namespace Game.Scripts
     [CreateAssetMenu(fileName = "ProjectileConfig", menuName = "Space-Idle/ProjectileConfig ", order = 0)]
     public class ProjectileConfig : ScriptableObject
     {
-        public ProjectileType Type;
+        public TowerType towerType;
         public float Speed;
         public int Damage;
         public float MaxLifetime;

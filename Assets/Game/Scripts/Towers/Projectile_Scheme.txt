@@ -1,0 +1,78 @@
+﻿22.04.2026
+
+ИНИЦИАЛИЗАЦИЯ (старт сцены)
+═══════════════════════════════════════════════════════
+
+GameplayInstaller
+    │
+    ├──► BindMemoryPool x3 (по одному на каждый ProjectileConfig)
+    │         │
+    │         └──► Projectile.Pool [WithId(TowerType)]
+    │                   │
+    │                   └──► OnCreated() → SetActive(false)
+    │                        (10 снарядов деактивированы, ждут в пуле)
+    │
+    ├──► BindInstance(ProjectileConfig[])
+    │
+    └──► ProjectileFactory [IInitializable]
+              │
+              └──► Initialize()
+                        │
+                        └──► ResolveId по каждому конфигу
+                                  │
+                                  └──► _pools[TowerType] = pool ×3
+
+
+СПАВН СНАРЯДА (башня стреляет)
+═══════════════════════════════════════════════════════
+
+Tower
+    │
+    │  Spawn(TowerType, position, direction)
+    ▼
+ProjectileFactory
+    │
+    ├──► GetConfig(TowerType) → ProjectileConfig
+    │
+    └──► _pools[TowerType].Spawn(start, direction, config)
+                │
+                ▼
+         Projectile.Pool
+                │
+                └──► Reinitialize(start, direction, config, this)
+                          │
+                          ▼
+                     Projectile.Init()
+                          │
+                          ├──► SetActive(true)
+                          ├──► Применяет параметры из config
+                          ├──► Сохраняет ссылку на pool (this)
+                          └──► Запускает корутину таймаута
+
+
+ВОЗВРАТ В ПУЛ (попадание или таймаут)
+═══════════════════════════════════════════════════════
+
+Projectile
+    │
+    ├──► OnTriggerEnter2D → enemy.TakeDamage()
+    │         │
+    │         └──► DespawnIfActive()
+    │
+    └──► DisableAfter() [корутина]
+              │
+              └──► DespawnIfActive()
+                        │
+                        │  если activeSelf == true
+                        ▼
+                   _pool.Despawn(this)
+                        │
+                        ▼
+                   OnDespawned()
+                        │
+                        └──► Deactivate()
+                                  │
+                                  ├──► StopCoroutine
+                                  ├──► velocity = zero
+                                  └──► SetActive(false)
+                                       (снаряд вернулся в пул)

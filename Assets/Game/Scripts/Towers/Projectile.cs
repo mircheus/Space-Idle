@@ -10,7 +10,10 @@ public class Projectile : MonoBehaviour
     private int _damage = 20;
     private float _maxLifetime = 5f;     // авто-уничтожение
 
-    [Inject] private Pool _pool;
+    // Ссылка на пул устанавливается при спавне через Init,
+    // а не через [Inject] — потому что пулов несколько и Zenject
+    // не смог бы определить какой именно инжектировать
+    private Pool _pool;
     
     private Vector3 _direction;
     private Rigidbody2D _rb;
@@ -18,8 +21,9 @@ public class Projectile : MonoBehaviour
 
     private void Awake() => _rb = GetComponent<Rigidbody2D>();
     
-    /// <summary>Вызывается башней сразу после Instantiate.</summary>
-    public void Init(Vector3 start, Vector3 direction, ProjectileConfig config)
+    // Вызывается из Pool.Reinitialize при каждом извлечении из пула.
+    // Pool передаёт себя (this) чтобы снаряд мог вернуться в нужный пул
+    public void Init(Vector3 start, Vector3 direction, ProjectileConfig config, Pool pool)
     {
         gameObject.SetActive(true);
         gameObject.transform.position = start;
@@ -28,9 +32,11 @@ public class Projectile : MonoBehaviour
         _damage = config.Damage;
         _maxLifetime = config.MaxLifetime;
         _maxLifetimeCoroutine = StartCoroutine(DisableAfter(_maxLifetime));
+        _pool = pool;
     }
 
-    public void Deactivate()
+    // Сброс состояния при возврате в пул — вызывается из OnDespawned
+    private void Deactivate()
     {
         if (_maxLifetimeCoroutine != null)
         {
@@ -60,20 +66,23 @@ public class Projectile : MonoBehaviour
         DespawnIfActive();
     }
 
+    // Защита от двойного Despawn — если снаряд уже деактивирован
+    // (вернулся в пул через попадание), повторный вызов из корутины игнорируется
     private void DespawnIfActive()
     {
         if(gameObject.activeSelf) _pool.Despawn(this);
     }
 
-    public class Pool : MemoryPool<Vector3, Vector3, Projectile>
+    public class Pool : MemoryPool<Vector3, Vector3, ProjectileConfig, Projectile>
     {
-        [Inject] private ProjectileConfig _config;
-        
-        protected override void Reinitialize(Vector3 start, Vector3 direction, Projectile projectile)
+        // Вызывается каждый раз когда снаряд извлекается из пула.
+        // this = сам пул, передаётся снаряду чтобы тот мог вернуться обратно
+        protected override void Reinitialize(Vector3 start, Vector3 direction, ProjectileConfig config, Projectile projectile)
         {
-            projectile.Init(start, direction, _config);
+            projectile.Init(start, direction, config, this);
         }
 
+        // Вызывается при возврате снаряда в пул — сбрасывает состояние
         protected override void OnDespawned(Projectile projectile)
         {
             projectile.Deactivate();
